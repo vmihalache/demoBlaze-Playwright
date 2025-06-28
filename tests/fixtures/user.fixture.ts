@@ -1,20 +1,24 @@
+import { faker } from '@faker-js/faker';
+
 interface User {
     userName: string
     password: string
 }
-type randomUser ={
+type users = {
     goodUser: User,
     badUser: User
 }
-export const fixtureUsers: randomUser = {
+export const randomUser = () : users => {
+    return {
     goodUser : {
-    userName: "newUser934",
-    password: "newpassword"
+    userName: `user_${faker.string.alphanumeric(6)}${Math.floor(Math.random() * 1000)}`,
+    password: faker.internet.password()
 },
-    badUser  : {
+    badUser: {
     userName: "",
     password: ""
-}
+},
+    }
 }
 
 

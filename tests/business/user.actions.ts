@@ -2,7 +2,7 @@ interface Iuser {
     userName: string,
     password: string
 }
-class BusinessCreateUser {
+export class BusinessCreateUser {
     protected userName: Iuser["userName"]
     protected passWord: Iuser["password"]
     constructor(
