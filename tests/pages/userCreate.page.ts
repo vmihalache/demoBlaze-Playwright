@@ -1,35 +1,47 @@
 import {type Locator, type Page} from '@playwright/test'
+import { UserFormBase } from './userFormBase'
+import { UserActions } from './userActions'
 
-
-export class CreateUser {
+export class CreateUser extends UserFormBase{
     readonly page: Page
-    readonly openSignUpModalButton: Locator
-    readonly userName: Locator
-    readonly password: Locator
     readonly closeButton: Locator
-    readonly signUpButton: Locator
+    readonly saveSignUpModal: Locator
+    readonly openSignUpModal: Locator
 
 constructor (page: Page) {
+    super(page.getByRole('dialog', { name: 'Sign up' }))
 this.page = page
-this.openSignUpModalButton = page.getByTestId("#signInModal")
-this.userName = page.getByRole("textbox",{name:"UserName"})
-this.password = page.getByRole("textbox",{name:"Password"})
-this.signUpButton=page.getByRole("button", {name:"Sign Up"})
+this.openSignUpModal=page.getByRole("link", {name:"Sign up"})
 this.closeButton=page.getByRole("button", {name:"Close"})
+this.saveSignUpModal = page.getByRole("button", {name:"Sign up"})
 }
+
 async goto () {
-    await this.page.goto("https://www.demoblaze.com/index.html")
+    await new UserActions(this.page).goto()
 }
 async openCreateUserFlow () {
-    await this.openSignUpModalButton.click()
+    await this.openSignUpModal.click();
+    
 }
 async fillUserNameBox (fixtureName: string) {
-    await this.userName.fill(fixtureName)
+    await new UserActions(this.page).fillUserNameBox(fixtureName,this.userName)
+  
 }
-async fillPasswordBox(fixturePassword: string) {
-    await this.password.fill(fixturePassword)
+async fillPasswordBox (fixturePassword: string) {
+    await new UserActions(this.page).fillPasswordBox(fixturePassword,this.password)
+  
 }
-async signUp() {
-    await this.signUpButton.click()
-}
+async signUp(): Promise<string> {
+    const dialogMessage = new Promise<string>((resolve) => {
+      this.page.once('dialog', async (dialog) => {
+        const msg = dialog.message();
+        await dialog.accept();
+        resolve(msg);
+      });
+    });
+  
+    await this.saveSignUpModal.click();
+    return await dialogMessage;
+  }
+  
 }

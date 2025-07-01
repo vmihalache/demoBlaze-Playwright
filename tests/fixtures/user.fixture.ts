@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-interface User {
+export interface User {
     userName: string
     password: string
 }

@@ -1,3 +1,4 @@
+
 interface Iuser {
     userName: string,
     password: string
@@ -12,8 +13,15 @@ export class BusinessCreateUser {
         this.userName = userName
         this.passWord = passWord
     }
-    
-    createUser() {
+    prepareCredentials() {
         return [this.userName,this.passWord]
+    }
+    createUser() {
+        return this.prepareCredentials()
       }
+    }
+ export class loginUser extends BusinessCreateUser {        
+    loginUser () {
+    return super.prepareCredentials()
+    }
 }
