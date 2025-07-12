@@ -20,7 +20,7 @@ export class BusinessCreateUser {
         return this.prepareCredentials()
       }
     }
- export class loginUser extends BusinessCreateUser {        
+ export class LogInUser extends BusinessCreateUser {        
     loginUser () {
     return super.prepareCredentials()
     }
