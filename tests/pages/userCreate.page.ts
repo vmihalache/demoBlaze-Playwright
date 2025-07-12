@@ -1,6 +1,7 @@
 import {type Locator, type Page} from '@playwright/test'
 import { UserFormBase } from './userFormBase'
 import { UserActions } from './userActions'
+import { Navigation } from '../utils/navigation'
 
 export class CreateUser extends UserFormBase{
     readonly page: Page
@@ -17,7 +18,7 @@ this.saveSignUpModal = page.getByRole("button", {name:"Sign up"})
 }
 
 async goto () {
-    await new UserActions(this.page).goto()
+    await new Navigation(this.page).goto()
 }
 async openCreateUserFlow () {
     await this.openSignUpModal.click();

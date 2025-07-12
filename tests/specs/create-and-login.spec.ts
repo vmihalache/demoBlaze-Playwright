@@ -16,6 +16,6 @@ test('should create a new user and login', async ({ page }) => {
   expect(signUpMsg).toBe('Sign up successful.');
   await loginUser.loginFlow(goodUser.userName, goodUser.password)
   const welcomeMsg = loginUser.signInConfirmation(goodUser.userName);
-  await welcomeMsg.waitFor({ state: 'visible' });
+  await welcomeMsg.waitFor({ state: 'visible',timeout: 10000 });
   await expect(welcomeMsg).toContainText(`Welcome ${goodUser.userName}`);
 });
