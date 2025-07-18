@@ -5,7 +5,7 @@ import { Locator, Page } from "@playwright/test";
     card: Locator
     constructor(page: Page) {
       this.page = page
-      this.card = page.locator('.card.h-100')
+      this.card = page.locator('.card.h-100 a img')
     }
     cardLocator () {
       return this.card
@@ -14,7 +14,9 @@ import { Locator, Page } from "@playwright/test";
       return this.card.hover()
     }
     async productCheck() {
-      await this.cardLocator().nth(0).waitFor({ state: "visible" })
-   }
+      const count = await this.cardLocator().count();
+      console.log(`Product cards found: ${count}`);
+      if (count === 0) throw new Error('No product cards found after waiting!');
+    }    
   }
 
