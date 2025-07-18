@@ -7,16 +7,21 @@ It covers user flows such as account creation, login, and logout using a Page Ob
 
 ## Project Structure
 
-/DEMOBLAZE PLAYWRIGHT TESTS/  
+/demoblaze-playwright-tests/  
 ├── README.md  
 ├── tests/  
 │   └── create-and-login.spec.ts  
+│   └── check-product-details.spec.ts
+     
 ├── stories/  
 │   └── login-user-stories.md  
+│   └── cart-management-stories.md
 ├── prompts/  
 │   └── login-test-generation.md  
+│   └── cart-management-test-generation.prompt.md  
 ├── layers/  
 │   └── login-layer-breakdown.md  
+│   └── product-management.md
 └── gpt-usage.md  
 
 ## Prerequisites
@@ -31,7 +36,8 @@ npx playwright test
 
 To run a specific test file:
 
-npx playwright test tests/create-and-login.spec.ts
+npx playwright test tests/create-and-login.spec.ts  
+npx playwright test check-product-details.spec.ts
 
 ## Key Concepts
 
@@ -49,17 +55,27 @@ npx playwright test tests/create-and-login.spec.ts
 - User creation  
 - User login  
 - User logout  
-- Modal handling and alert dialogs
+- Modal handling and alert dialogs  
+- Product selection in the main view  
+- Dynamic detail checks using product models (e.g., `AbstractProduct`, `ProductCartDetail`, etc.)
 
 ## Known Issues / TODO
 
 - Add more assertions in some tests (e.g., sign-up failure cases)  
-- Expand coverage for invalid credentials and edge cases
+- Expand coverage for invalid credentials and edge cases  
+- Expand the range of products that are validated  
+
+## Design Philosophy
+
+- Write stable, readable, and modular tests.  
+- Use abstraction when it improves maintainability.  
+- Prioritize learning and control over shortcuts.  
+- AI is used as a tool, not a crutch.
 
 ## Notes on AI Assistance
 
-Some parts of the code and architecture have been assisted by AI suggestions, primarily for prototyping and debugging ideas.  
-All final decisions, implementation, and reviews are made by the author to maintain control over quality and learning.
+This project includes selectively used AI-assisted suggestions, primarily for debugging edge cases or prototyping.  
+All implementations and final decisions were made by the author to ensure full understanding, ownership, and quality.
 
 ## Contribution
 
