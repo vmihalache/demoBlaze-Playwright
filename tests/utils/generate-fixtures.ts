@@ -19,7 +19,7 @@ export class syncProductFixture {
             const newCard = new SingleProduct(productPage.cardLocator().nth(i))
             const name = await newCard.nameMethod.textContent();
             const price = await newCard.priceMethod.textContent();
-            const description = await newCard.descriptionMethod.textContent();
+            const description = await newCard.descriptionMethod?.textContent();
 
             if (name && price && description) {
                 this.products.push({

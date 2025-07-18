@@ -20,7 +20,7 @@ test('should check random product details', async ({ page }) => {
         await prodToCheck.hover()
         const product = new SingleProduct(prodToCheck)
         const name = await product.nameMethod.textContent()
-        const description = await product.descriptionMethod.textContent()
+        const description = await product.descriptionMethod?.textContent()
         const price = await product.priceMethod.textContent()
         if (name && description && price) {
             expect(data.some(dataValue =>
